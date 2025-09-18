@@ -1,58 +1,45 @@
-opcao = 0
-manifestacoes = []
+from Entrega_2.Ouvidoria_Methods import *
+from Entrega_2.operacoesbd import *
 
-while opcao != 6:
+opt = 0
+connection = criarConexao("localhost", "root", "admin", "ouvidoria")
+
+while opt != 7:
     print("\n" + "--- Ouvidoria 24h ---" + "\n")
-    print(
-        "1) Listar Manifestações \n2) Adicionar Nova Manifestação \n3) Pesquisar por Código \n4) Remover por Código \n5) Editar Manifestação \n6) Encerrar")
-    opcao = int(input("\n" + "Escolha sua opção: "))
+    print("1) Listar Todas as Manifestações \n"
+          "2) Listar Manifestações por Tipo \n"
+          "3) Listar Números de Manifetações \n"
+          "4) Adicionar Nova Manifestação \n"
+          "5) Pesquisar Manifestação por Código \n"
+          "6) Remover Manifestação por Código \n"
+          "7) Encerrar")
+    opt = int(input("\n" + "Escolha sua opção: "))
 
-    if opcao == 1:
-        if len(manifestacoes) == 0:
-            print("Não existem manifestações registradas na base de dados.")
+# Opção 1 - Listar Todas as manifestações
+    if opt == 1:
+        listar_todas_manifestacoes(connection)
 
-        else:
-            print("\n" + "--- Listagem de Manifestações ---" + "\n")
-            for n in range(len(manifestacoes)):
-                print(f'- Manifestação nº {n + 1}: "{manifestacoes[n]}".')
+# Opção 2 - Listar Manifestações por Tipo
+    elif opt == 2:
+        listar_manifestacoes_tipo(connection)
 
-    elif opcao == 2:
-        novaManifestacao = input("Por favor, digite sua reclamação, sugestão ou elogio: ")
-        manifestacoes.append(novaManifestacao)
-        print("Sua manifestação foi adicionada com sucesso!")
+# Opção 3 - Listar Números de Manifetações
+    elif opt == 3:
+        listar_numero_manifestacoes(connection)
 
-    elif opcao == 3:
-        codigo = int(input("\n" + "Digite o código da manifestação a ser pesquisada: "))
+# Opção 4 - Adicionar Nova Manifestação
+    elif opt == 4:
+        adicionar_manifestacoes_tipo(connection)
 
-        if 1 <= codigo <= len(manifestacoes):
-            manifestacaoPesquisada = manifestacoes[codigo - 1]
-            print(f'A manifestação de código {codigo} diz o seguinte: "{manifestacaoPesquisada}".')
+# Opção 5 -  Pesquisar Manifestação por Código
+    elif opt == 5:
+        pesquisa_manifestacao(connection)
 
-        else:
-            print("O código informado é inválido.")
+# Opção 5 -  Remover Manifestação por Código
+    elif opt == 6:
+        remover_manifestacao(connection)
 
-    elif opcao == 4:
-        codigo = int(input("\n" + "Digite o código da manifestação a ser removida: "))
-
-        if 1 <= codigo <= len(manifestacoes):
-            manifestacoes.pop(codigo - 1)
-            print(f"A manifestação de código {codigo} foi removida com sucesso!")
-
-        else:
-            print("O código informado é inválido.")
-
-    elif opcao == 5:
-        codigo = int(input("\n" + "Digite o código da manifestação a ser editada: "))
-
-        if 1 <= codigo <= len(manifestacoes):
-            novaManifestacao = input("Por favor, digite sua reclamação, sugestão ou elogio: ")
-            manifestacoes[codigo - 1] = novaManifestacao
-            print("Manifestação editada com sucesso!")
-
-        else:
-            print("O código informado é inválido.")
-
-    elif opcao != 6:
+    elif opt != 7:
         print("Opção Inválida")
 
 print("\n" + "Obrigado por usar a Ouvidoria 24h!")
