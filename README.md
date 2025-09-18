@@ -43,3 +43,15 @@ Projeto de uma aplicação de **ouvidoria**, desenvolvida em **Python**, para re
 - Pesquisar manifestações por código.  
 - Excluir manifestações.  
 - Contar quantas manifestações estão cadastradas.
+
+---
+
+## 👥 Grupo
+
+- **Integrantes:**
+  - Ody Júnior de Melo Mendes
+  - Flávio Alexandre Rodrigues da Costa
+
+
+- **Professor:**  
+  - Daniel Abella  
